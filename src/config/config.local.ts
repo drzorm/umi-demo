@@ -1,1 +1,3 @@
-export default { c: "local" };
+import { defineConfig } from "umi";
+
+export default defineConfig({});
