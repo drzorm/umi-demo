@@ -46,8 +46,9 @@ const externals = matchExternals.reduce(
 const scripts = [polyfill, ...matchExternals.map(it => it.cdn)];
 
 export default defineConfig({
-  base: "/umi-demo/",
+  base: "/",
   outputPath: "docs",
+  publicPath: "./",
   hash: true,
   history: {
     type: "hash",
