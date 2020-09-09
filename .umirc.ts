@@ -12,8 +12,7 @@ interface ExternalsItem {
 const NODE_ENV = process.env.NODE_ENV;
 const dependencies = packageJson.dependencies as Record<string, string>;
 
-const polyfill =
-  "https://polyfill.io/v3/polyfill.min.js?callback=polyfillLoad&features=es2015%2Ces2016%2Ces2017%2Ces2018%2Ces2019";
+const polyfill = "https://polyfill.io/v3/polyfill.min.js?features=es2015%2Ces2016%2Ces2017%2Ces2018%2Ces2019";
 const externalList: ExternalsItem[] = [
   {
     key: "react",
@@ -49,6 +48,7 @@ export default defineConfig({
   base: "/",
   outputPath: "docs",
   publicPath: "./",
+  favicon: "./favicon.ico",
   hash: true,
   history: {
     type: "hash",
