@@ -12,7 +12,7 @@ interface ExternalsItem {
 const NODE_ENV = process.env.NODE_ENV;
 const dependencies = packageJson.dependencies as Record<string, string>;
 
-const externals: ExternalsItem[] = [
+const externalList: ExternalsItem[] = [
   {
     key: "react",
     var: "window.React",
@@ -28,14 +28,27 @@ const externals: ExternalsItem[] = [
 // * 适用 package.json dependencies 版本号使用 ^version/version 格式
 const matchVersion = (it: ExternalsItem) => /^\^?\d+/.test(dependencies[it.key]);
 
-const matchExternals = externals.filter(matchVersion).map(it => ({
+const matchExternals = externalList.filter(matchVersion).map(it => ({
   ...it,
   cdn: it.cdn.replace("{version}", dependencies[it.key].replace(/^\^/, "")),
 }));
 
+const externals = matchExternals.reduce(
+  (prev, curr) =>
+    Object.assign(prev, {
+      [curr.key]: curr.var,
+    }),
+  {} as Record<string, string>,
+);
+
+const scripts = [
+  "https://polyfill.io/v3/polyfill.js?features=es5,es6,es7&flags=gated",
+  ...matchExternals.map(it => it.cdn),
+];
+
 export default defineConfig({
   base: "/",
-  publicPath: "/static/",
+  outputPath: "docs",
   hash: true,
   history: {
     type: "hash",
@@ -51,6 +64,10 @@ export default defineConfig({
     edge: false,
     ios: false,
   },
+  title: "hi",
+  theme: {
+    // 配置less变量
+  },
   cssLoader: {
     localsConvention: "camelCase",
   },
@@ -60,14 +77,8 @@ export default defineConfig({
     type: "none",
     exclude: [],
   },
-  externals: matchExternals.reduce(
-    (prev, curr) =>
-      Object.assign(prev, {
-        [curr.key]: curr.var,
-      }),
-    {} as Record<string, string>,
-  ),
-  scripts: matchExternals.map(it => it.cdn),
+  externals,
+  scripts: scripts,
   chainWebpack: config => {
     config.resolve.alias.set("@", path.resolve(__dirname, "./src/"));
     config.optimization.splitChunks({
