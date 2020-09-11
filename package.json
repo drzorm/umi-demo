@@ -6,7 +6,7 @@
     "build:test": "cross-env BIZ_ENV=test umi build",
     "build:prod": "cross-env BIZ_ENV=prod umi build",
     "build": "cross-env BIZ_ENV=prod umi build",
-    "analyze": "cross-env ANALYZE=1 umi build",
+    "analyze": "cross-env BIZ_ENV=prod ANALYZE=1 umi build",
     "postinstall": "umi generate tmp",
     "prettier": "prettier --write '**/*.{js,jsx,tsx,ts,less,md,json}'",
     "test": "umi-test",
