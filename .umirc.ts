@@ -17,12 +17,12 @@ const externalList: ExternalsItem[] = [
   {
     key: "react",
     var: "window.React",
-    cdn: `https://cdn.jsdelivr.net/npm/react@{version}/umd/react.${NODE_ENV}.min.js`,
+    cdn: `https://cdn.jsdelivr.net/npm/react@{{version}}/umd/react.${NODE_ENV}.min.js`,
   },
   {
     key: "react-dom",
     var: "window.ReactDOM",
-    cdn: `https://cdn.jsdelivr.net/npm/react-dom@{version}/umd/react-dom.${NODE_ENV}.min.js`,
+    cdn: `https://cdn.jsdelivr.net/npm/react-dom@{{version}}/umd/react-dom.${NODE_ENV}.min.js`,
   },
 ];
 
@@ -31,7 +31,7 @@ const matchVersion = (it: ExternalsItem) => /^\^?\d+/.test(dependencies[it.key])
 
 const matchExternals = externalList.filter(matchVersion).map(it => ({
   ...it,
-  cdn: it.cdn.replace("{version}", dependencies[it.key].replace(/^\^/, "")),
+  cdn: it.cdn.replace("{{version}}", dependencies[it.key].replace(/^\^/, "")),
 }));
 
 const externals = matchExternals.reduce(
@@ -56,7 +56,16 @@ export default defineConfig({
   define: {
     ENV: process.env.NODE_ENV,
   },
-  proxy: {},
+  proxy: {
+    // https://cli.vuejs.org/config/#devserver-proxy
+    "/api": {
+      target: process.env.SERVER_PATH,
+      changeOrigin: true,
+      pathRewrite: {
+        "^/api": "",
+      },
+    },
+  },
   targets: {
     chrome: 79,
     firefox: false,
@@ -64,7 +73,7 @@ export default defineConfig({
     edge: false,
     ios: false,
   },
-  title: "hi",
+  title: false,
   theme: {
     // 配置less变量
   },

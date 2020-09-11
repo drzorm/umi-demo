@@ -2,6 +2,15 @@ import React from "react";
 
 import "./index.less";
 
+import { Helmet } from "umi";
+
 export default () => {
-  return <div>login</div>;
+  return (
+    <>
+      <Helmet>
+        <title>login</title>
+      </Helmet>
+      <div>login</div>
+    </>
+  );
 };
