@@ -1,5 +1,7 @@
 import { defineConfig } from "umi";
 
 export default defineConfig({
-  base: "/",
+  define: {
+    SERVER_PATH: "/api",
+  },
 });

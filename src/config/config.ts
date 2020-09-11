@@ -1,3 +1,5 @@
 import { defineConfig } from "umi";
 
-export default defineConfig({});
+import { routes } from "./routes";
+
+export default defineConfig({ routes });

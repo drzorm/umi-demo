@@ -7,15 +7,19 @@ declare module "*.svg" {
   const url: string;
   export default url;
 }
-declare const ENV: string;
+
+type ENV = "development" | "production" | "test";
+
+declare const ENV: ENV;
+declare const SERVER_PATH: string;
 
 declare interface Window {
-  KEY: string;
+  key: string;
 }
 
 declare namespace NodeJS {
   export interface ProcessEnv {
-    NODE_ENV: "development" | "production";
+    NODE_ENV: ENV;
     SERVER_PATH: string;
   }
 }

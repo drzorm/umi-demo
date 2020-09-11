@@ -2,8 +2,7 @@ import React, { useContext, useEffect } from "react";
 
 import { useMount } from "ahooks";
 import clsx from "clsx";
-import { Helmet, useRequest } from "umi";
-import request from "umi-request";
+import { Helmet, request, useRequest } from "umi";
 
 import ThemeContext from "@/provider/theme/context";
 
@@ -15,7 +14,7 @@ export default () => {
 
   const { data, error, loading } = useRequest(
     () =>
-      request("/api/topics", {
+      request("/topics", {
         params: {
           page: ~~(Math.random() * 99),
           limit: 1,
@@ -28,6 +27,7 @@ export default () => {
 
   useEffect(() => {
     console.log("ENV :>> ", ENV);
+    console.log("SERVER_PATH", SERVER_PATH);
   }, []);
 
   useMount(() => {

@@ -49,12 +49,14 @@ export default defineConfig({
   outputPath: "docs",
   publicPath: "./",
   favicon: "./favicon.ico",
+  title: false,
   hash: true,
   history: {
     type: "hash",
   },
   define: {
     ENV: process.env.NODE_ENV,
+    SERVER_PATH: process.env.SERVER_PATH,
   },
   proxy: {
     // https://cli.vuejs.org/config/#devserver-proxy
@@ -73,7 +75,6 @@ export default defineConfig({
     edge: false,
     ios: false,
   },
-  title: false,
   theme: {
     // 配置less变量
   },
