@@ -333,7 +333,7 @@ var I = Object.assign,
         P = d.loading;
       return (
         Object(i.useEffect)(() => {
-          console.log("ENV :>> ", "production"), console.log("SERVER_PATH", "https://cnodejs.org/api/v1");
+          console.log("ENV :>> ", "prod"), console.log("SERVER_PATH", "https://cnodejs.org/api/v1");
         }, []),
         Object(l.a)(() => {
           console.log("useMount");

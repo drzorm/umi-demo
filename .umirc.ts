@@ -1,6 +1,7 @@
 import path from "path";
 import { defineConfig } from "umi";
 
+import Config from "./config";
 import packageJson from "./package.json";
 
 interface ExternalsItem {
@@ -55,13 +56,13 @@ export default defineConfig({
     type: "hash",
   },
   define: {
-    ENV: process.env.NODE_ENV,
-    SERVER_PATH: process.env.SERVER_PATH,
+    ENV: process.env.BIZ_ENV,
+    ...Config,
   },
   proxy: {
     // https://cli.vuejs.org/config/#devserver-proxy
     "/api": {
-      target: process.env.SERVER_PATH,
+      target: Config.SERVER_PATH,
       changeOrigin: true,
       pathRewrite: {
         "^/api": "",

@@ -2,7 +2,7 @@ import { RequestConfig } from "umi";
 
 export const request: RequestConfig = {
   timeout: 30000,
-  prefix: SERVER_PATH,
+  prefix: process.env.NODE_ENV === "development" ? "/api" : SERVER_PATH,
   errorConfig: {
     adaptor: res => {
       const { success, error_msg, ...others } = res;

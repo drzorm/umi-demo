@@ -1,8 +1,11 @@
 {
   "private": true,
   "scripts": {
-    "start": "umi dev",
-    "build": "umi build",
+    "start": "cross-env BIZ_ENV=dev umi dev",
+    "build:dev": "cross-env BIZ_ENV=dev umi build",
+    "build:test": "cross-env BIZ_ENV=test umi build",
+    "build:prod": "cross-env BIZ_ENV=prod umi build",
+    "build": "cross-env BIZ_ENV=prod umi build",
     "analyze": "cross-env ANALYZE=1 umi build",
     "postinstall": "umi generate tmp",
     "prettier": "prettier --write '**/*.{js,jsx,tsx,ts,less,md,json}'",
