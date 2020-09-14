@@ -10,9 +10,9 @@ interface Config {
   [key: string]: any;
 }
 
-export const defineUserConfig = (config: Partial<Config>) => config;
+export const defineCustomConfig = (config: Partial<Config>) => config;
 
-const Config = defineUserConfig({
+const Config = defineCustomConfig({
   SERVER_PATH: "https://cnodejs.org/api/v1",
 });
 

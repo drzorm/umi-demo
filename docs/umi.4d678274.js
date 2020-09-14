@@ -198,21 +198,21 @@ var S = Object.assign,
                     : C.skipErrorHandler
                 )
                   throw u;
-                let T;
+                let L;
                 if (u.name === "ResponseError" && u.data && u.request) {
                   var m;
                   const _ = { req: u.request, res: u.response };
-                  (T = y(u.data, _)),
-                    (u.message = ((m = T) === null || m === void 0 ? void 0 : m.errorMessage) || u.message),
+                  (L = y(u.data, _)),
+                    (u.message = ((m = L) === null || m === void 0 ? void 0 : m.errorMessage) || u.message),
                     (u.data = u.data),
-                    (u.info = T);
+                    (u.info = L);
                 }
-                if (((T = u.info), T)) {
-                  var M, L, D;
-                  const _ = (M = T) === null || M === void 0 ? void 0 : M.errorMessage,
-                    N = (L = T) === null || L === void 0 ? void 0 : L.errorCode,
-                    K = ((D = A.errorConfig) === null || D === void 0 ? void 0 : D.errorPage) || P;
-                  switch ((j = T) === null || j === void 0 ? void 0 : j.showType) {
+                if (((L = u.info), L)) {
+                  var M, D, T;
+                  const _ = (M = L) === null || M === void 0 ? void 0 : M.errorMessage,
+                    N = (D = L) === null || D === void 0 ? void 0 : D.errorCode,
+                    K = ((T = A.errorConfig) === null || T === void 0 ? void 0 : T.errorPage) || P;
+                  switch ((j = L) === null || j === void 0 ? void 0 : j.showType) {
                     case c.SILENT:
                       break;
                     case c.WARN_MESSAGE:
@@ -243,15 +243,15 @@ var S = Object.assign,
               var C;
               yield I();
               const j = u.req,
-                T = u.res;
+                L = u.res;
               if ((C = j.options) === null || C === void 0 ? void 0 : C.skipErrorHandler) return;
               const m = j.options,
                 M = m.getResponse,
-                L = M ? T.data : T,
-                D = y(L, u);
-              if (D.success === !1) {
-                const _ = new Error(D.errorMessage);
-                throw ((_.name = "BizError"), (_.data = L), (_.info = D), _);
+                D = M ? L.data : L,
+                T = y(D, u);
+              if (T.success === !1) {
+                const _ = new Error(T.errorMessage);
+                throw ((_.name = "BizError"), (_.data = D), (_.info = T), _);
               }
             }),
           );
@@ -464,9 +464,11 @@ var S = Object.assign,
       errorConfig: {
         adaptor: m => {
           const M = m.success,
-            L = m.error_msg,
-            D = Object(E.a)(m, ["success", "error_msg"]);
-          return S(S({}, D), { success: m.success, errorMessage: m.error_msg });
+            D = m.error_msg,
+            T = Object(E.a)(m, ["success", "error_msg"]);
+          return typeof M == "undefined"
+            ? { success: !1, errorMessage: D || "网络异常, 请稍后重试" }
+            : S(S({}, T), { success: m.success, errorMessage: m.error_msg });
         },
       },
       middlewares: [],
@@ -480,15 +482,15 @@ var S = Object.assign,
       throw new Error("[plugin-initial-state]: useModel is not a function, @umijs/plugin-model is required.");
     var r = m => {
       const M = m.children,
-        L = Object(v.useRef)(!1),
-        D = Object(t.a)("@@initialState") || {},
-        _ = D.loading,
+        D = Object(v.useRef)(!1),
+        T = Object(t.a)("@@initialState") || {},
+        _ = T.loading,
         N = _ === void 0 ? !1 : _;
       return (
         Object(v.useEffect)(() => {
-          N || (L.current = !0);
+          N || (D.current = !0);
         }, [N]),
-        N && !L.current ? null : M
+        N && !D.current ? null : M
       );
     };
     function n(m) {
@@ -513,11 +515,11 @@ var S = Object.assign,
             key: M[0],
             namespace: M[0],
             hook: M[1],
-            onUpdate: L => {
-              const D = M,
-                _ = Object(l.a)(D, 1),
+            onUpdate: D => {
+              const T = M,
+                _ = Object(l.a)(T, 1),
                 N = _[0];
-              (p.data[N] = L), p.update(N);
+              (p.data[N] = D), p.update(N);
             },
           }),
         ),
@@ -566,7 +568,7 @@ var S = Object.assign,
           args: m,
         }),
       j = C();
-    var T = (a.default = j());
+    var L = (a.default = j());
     window.g_umi = { version: "3.2.20" };
   },
 });
