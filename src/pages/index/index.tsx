@@ -9,6 +9,7 @@ import ThemeContext from "@/provider/theme/context";
 import style from "./index.less";
 
 let index = 0;
+const interval = 6000;
 export default () => {
   const themeContext = useContext(ThemeContext);
 
@@ -40,7 +41,7 @@ export default () => {
         type: "update",
         payload: ["blue", "red"][index++ % 2],
       });
-    }, 3000);
+    }, interval);
     return () => {
       window.clearTimeout(timer);
     };
@@ -51,7 +52,7 @@ export default () => {
       <Helmet>
         <title>{themeContext.state}</title>
       </Helmet>
-      <div className={clsx(style.state, style[themeContext.state])}>{data?.[0]?.title}</div>
+      <div className={clsx(style.theme, style[themeContext.state])}>{data?.[0]?.title}</div>
     </>
   );
 };
