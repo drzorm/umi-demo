@@ -22,7 +22,8 @@ export default () => {
         },
       }),
     {
-      pollingInterval: 6000,
+      // pollingInterval: 6000,
+      refreshOnWindowFocus: true,
     },
   );
 

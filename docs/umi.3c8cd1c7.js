@@ -327,7 +327,7 @@ var S = Object.assign,
       var n;
       const l = Object(i.useContext)(f.a),
         O = Object(E.e)(() => Object(E.d)("/topics", { params: { page: ~~(Math.random() * 99), limit: 1 } }), {
-          pollingInterval: 6e3,
+          refreshOnWindowFocus: !0,
         }),
         c = O.data,
         P = O.error,
