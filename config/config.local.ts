@@ -1,5 +1,7 @@
-/* 本地环境配置 */
+/* 本地环境配置 - 优先级最高 */
 
-module.exports = {
+import { defineUserConfig } from "config";
+
+module.exports = defineUserConfig({
   SERVER_PATH: "https://cnodejs.org/api/v1",
-};
+});

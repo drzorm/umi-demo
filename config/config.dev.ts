@@ -1,5 +1,7 @@
 /* 开发环境配置 */
 
-module.exports = {
+import { defineUserConfig } from "config";
+
+module.exports = defineUserConfig({
   SERVER_PATH: "https://cnodejs.org/api/v1",
-};
+});

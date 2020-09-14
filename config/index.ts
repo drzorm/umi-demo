@@ -1,13 +1,20 @@
 /* eslint-disable @typescript-eslint/no-require-imports */
 
 /*
- * 默认生产环境配置
- * 配置会通过 umirc.ts define 注入, 用于提供给代码中可用的变量
+ * 生产环境配置 - 默认
+ * 通过 .umirc.ts define 配置项注入, 用于提供给代码中可用的变量
  */
 
-const Config = {
+interface Config {
+  SERVER_PATH: string;
+  [key: string]: any;
+}
+
+export const defineUserConfig = (config: Partial<Config>) => config;
+
+const Config = defineUserConfig({
   SERVER_PATH: "https://cnodejs.org/api/v1",
-};
+});
 
 if (process.env.BIZ_ENV !== "prod") {
   if (process.env.NODE_ENV === "development") {
@@ -17,4 +24,4 @@ if (process.env.BIZ_ENV !== "prod") {
   }
 }
 
-export default Config;
+export default Config as Config;

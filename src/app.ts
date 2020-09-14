@@ -6,6 +6,14 @@ export const request: RequestConfig = {
   errorConfig: {
     adaptor: res => {
       const { success, error_msg, ...others } = res;
+
+      if (typeof success === "undefined") {
+        return {
+          success: false,
+          errorMessage: error_msg || "网络异常, 请稍后重试",
+        };
+      }
+
       return {
         ...others,
         success: res.success,
