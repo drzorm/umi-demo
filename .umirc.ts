@@ -82,6 +82,9 @@ export default defineConfig({
   cssLoader: {
     localsConvention: "camelCase",
   },
+  cssModulesTypescriptLoader: {
+    mode: "emit",
+  },
   ignoreMomentLocale: true,
   esbuild: {},
   nodeModulesTransform: {
