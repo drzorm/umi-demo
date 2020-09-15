@@ -1,24 +1,24 @@
 var S = Object.assign,
   F = (h, a, e) =>
     new Promise((i, o) => {
-      var d = f => {
+      var d = (f) => {
           try {
             E(e.next(f));
           } catch (v) {
             o(v);
           }
         },
-        s = f => {
+        s = (f) => {
           try {
             E(e.throw(f));
           } catch (v) {
             o(v);
           }
         },
-        E = f => (f.done ? i(f.value) : Promise.resolve(f.value).then(d, s));
+        E = (f) => (f.done ? i(f.value) : Promise.resolve(f.value).then(d, s));
       E((e = e.apply(h, a)).next());
     });
-(function(h) {
+(function (h) {
   function a(t) {
     for (var r = t[0], n = t[1], l = t[2], O, c, P = 0, g = []; P < r.length; P++)
       (c = r[P]), Object.prototype.hasOwnProperty.call(o, c) && o[c] && g.push(o[c][0]), (o[c] = 0);
@@ -46,16 +46,16 @@ var S = Object.assign,
   }
   (s.m = h),
     (s.c = i),
-    (s.d = function(t, r, n) {
+    (s.d = function (t, r, n) {
       s.o(t, r) || Object.defineProperty(t, r, { enumerable: !0, get: n });
     }),
-    (s.r = function(t) {
+    (s.r = function (t) {
       typeof Symbol != "undefined" &&
         Symbol.toStringTag &&
         Object.defineProperty(t, Symbol.toStringTag, { value: "Module" }),
         Object.defineProperty(t, "__esModule", { value: !0 });
     }),
-    (s.t = function(t, r) {
+    (s.t = function (t, r) {
       if ((r & 1 && (t = s(t)), r & 8)) return t;
       if (r & 4 && typeof t == "object" && t && t.__esModule) return t;
       var n = Object.create(null);
@@ -64,24 +64,24 @@ var S = Object.assign,
           s.d(
             n,
             l,
-            function(O) {
+            function (O) {
               return t[O];
             }.bind(null, l),
           );
       return n;
     }),
-    (s.n = function(t) {
+    (s.n = function (t) {
       var r =
         t && t.__esModule
-          ? function() {
+          ? function () {
               return t.default;
             }
-          : function() {
+          : function () {
               return t;
             };
       return s.d(r, "a", r), r;
     }),
-    (s.o = function(t, r) {
+    (s.o = function (t, r) {
       return Object.prototype.hasOwnProperty.call(t, r);
     }),
     (s.p = "./");
@@ -92,12 +92,12 @@ var S = Object.assign,
   var R = f;
   return d.push([0, 1]), e();
 })({
-  "+ego": function(h, a, e) {
+  "+ego": function (h, a, e) {
     "use strict";
     e.r(a);
     var i = e("cDcd"),
       o = e.n(i);
-    const d = o.a.memo(n => o.a.createElement("div", { className: "layout" }, n.children));
+    const d = o.a.memo((n) => o.a.createElement("div", { className: "layout" }, n.children));
     var s = d,
       E = e("tJVT"),
       f = e("sm/d");
@@ -109,7 +109,7 @@ var S = Object.assign,
             return n;
         }
       },
-      R = Object(i.memo)(n => {
+      R = Object(i.memo)((n) => {
         const l = Object(i.useReducer)(v, "red"),
           O = Object(E.a)(l, 2),
           c = O[0],
@@ -117,27 +117,27 @@ var S = Object.assign,
         return o.a.createElement(f.a.Provider, { value: { state: c, dispatch: P } }, n.children);
       });
     var t = R,
-      r = (a.default = Object(i.memo)(n => o.a.createElement(t, null, o.a.createElement(s, null, n.children))));
+      r = (a.default = Object(i.memo)((n) => o.a.createElement(t, null, o.a.createElement(s, null, n.children))));
   },
-  0: function(h, a, e) {
+  0: function (h, a, e) {
     h.exports = e("tB8F");
   },
-  "2hfb": function(h, a, e) {},
-  "9kvl": function(h, a, e) {
+  "2hfb": function (h, a, e) {},
+  "9kvl": function (h, a, e) {
     "use strict";
-    e.d(a, "b", function() {
+    e.d(a, "b", function () {
       return i.b;
     }),
-      e.d(a, "c", function() {
+      e.d(a, "c", function () {
         return o.a;
       }),
-      e.d(a, "d", function() {
+      e.d(a, "d", function () {
         return U;
       }),
-      e.d(a, "e", function() {
+      e.d(a, "e", function () {
         return O;
       }),
-      e.d(a, "a", function() {
+      e.d(a, "a", function () {
         return b.a;
       });
     var i = e("FfOG"),
@@ -157,8 +157,8 @@ var S = Object.assign,
         p,
         S(
           {
-            formatResult: y => (y == null ? void 0 : y.data),
-            requestMethod: y => {
+            formatResult: (y) => (y == null ? void 0 : y.data),
+            requestMethod: (y) => {
               if (typeof y == "string") return U(y);
               if (typeof y == "object") {
                 const B = y.url,
@@ -173,7 +173,7 @@ var S = Object.assign,
       );
     }
     let c;
-    (function(p) {
+    (function (p) {
       (p[(p.SILENT = 0)] = "SILENT"),
         (p[(p.WARN_MESSAGE = 1)] = "WARN_MESSAGE"),
         (p[(p.ERROR_MESSAGE = 2)] = "ERROR_MESSAGE"),
@@ -186,11 +186,11 @@ var S = Object.assign,
         var p;
         if (g) return g;
         const A = o.a.applyPlugins({ key: "request", type: n.ApplyPluginsType.modify, initialValue: {} }),
-          y = ((p = A.errorConfig) === null || p === void 0 ? void 0 : p.adaptor) || (u => u);
+          y = ((p = A.errorConfig) === null || p === void 0 ? void 0 : p.adaptor) || ((u) => u);
         (g = Object(r.a)(
           S(
             {
-              errorHandler: u => {
+              errorHandler: (u) => {
                 var I, C, j;
                 if (
                   u == null || (I = u.request) === null || I === void 0 || (C = I.options) === null || C === void 0
@@ -239,7 +239,7 @@ var S = Object.assign,
           ),
         )),
           g.use((u, I) =>
-            F(this, null, function*() {
+            F(this, null, function* () {
               var C;
               yield I();
               const j = u.req,
@@ -256,16 +256,16 @@ var S = Object.assign,
             }),
           );
         const B = A.middlewares || [];
-        B.forEach(u => {
+        B.forEach((u) => {
           g.use(u);
         });
         const W = A.requestInterceptors || [],
           X = A.responseInterceptors || [];
         return (
-          W.map(u => {
+          W.map((u) => {
             g.interceptors.request.use(u);
           }),
-          X.map(u => {
+          X.map((u) => {
             g.interceptors.response.use(u);
           }),
           g
@@ -277,7 +277,7 @@ var S = Object.assign,
       };
     var b = e("qhky");
   },
-  A8du: function(h, a, e) {
+  A8du: function (h, a, e) {
     "use strict";
     e.r(a);
     var i = e("cDcd"),
@@ -293,12 +293,12 @@ var S = Object.assign,
         o.a.createElement("div", null, "login"),
       );
   },
-  FfOG: function(h, a, e) {
+  FfOG: function (h, a, e) {
     "use strict";
-    e.d(a, "a", function() {
+    e.d(a, "a", function () {
       return s;
     }),
-      e.d(a, "b", function() {
+      e.d(a, "b", function () {
         return d;
       });
     var i = e("YS25");
@@ -310,7 +310,7 @@ var S = Object.assign,
         o = S(S({}, o), f);
       };
   },
-  GV2H: function(h, a, e) {
+  GV2H: function (h, a, e) {
     "use strict";
     e.r(a);
     var i = e("cDcd"),
@@ -334,7 +334,7 @@ var S = Object.assign,
         g = O.loading;
       return (
         Object(i.useEffect)(() => {
-          console.log("ENV :>> ", "prod"), console.log("SERVER_PATH", "https://cnodejs.org/api/v1");
+          console.log("ENV :>> ", void 0), console.log("SERVER_PATH", "https://cnodejs.org/api/v1");
         }, []),
         Object(d.a)(() => {
           console.log("useMount");
@@ -360,9 +360,9 @@ var S = Object.assign,
       );
     };
   },
-  I5X1: function(h, a, e) {
+  I5X1: function (h, a, e) {
     "use strict";
-    e.d(a, "a", function() {
+    e.d(a, "a", function () {
       return R;
     });
     var i = e("tJVT"),
@@ -384,7 +384,7 @@ var S = Object.assign,
       return (
         (x.current = P),
         Object(o.useEffect)(() => {
-          const U = b => {
+          const U = (b) => {
             if (r && l.current) {
               const p = l.current(b),
                 A = x.current;
@@ -404,9 +404,9 @@ var S = Object.assign,
       );
     }
   },
-  bCY9: function(h, a, e) {
+  bCY9: function (h, a, e) {
     "use strict";
-    e.d(a, "a", function() {
+    e.d(a, "a", function () {
       return o;
     });
     var i = e("LtsZ");
@@ -422,38 +422,38 @@ var S = Object.assign,
       ],
     });
   },
-  cDcd: function(h, a) {
+  cDcd: function (h, a) {
     h.exports = window.React;
   },
-  faye: function(h, a) {
+  faye: function (h, a) {
     h.exports = window.ReactDOM;
   },
-  "o7/9": function(h, a, e) {
+  "o7/9": function (h, a, e) {
     h.exports = { theme: "theme___yQy2E", red: "red___ROgao", blue: "blue___1YK0d" };
   },
-  "sm/d": function(h, a, e) {
+  "sm/d": function (h, a, e) {
     "use strict";
     var i = e("cDcd"),
       o = e.n(i);
-    const d = o.a.createContext({ state: "red", dispatch: s => {} });
+    const d = o.a.createContext({ state: "red", dispatch: (s) => {} });
     a.a = d;
   },
-  tB8F: function(h, a, e) {
+  tB8F: function (h, a, e) {
     "use strict";
     e.r(a);
     var i = {};
     e.r(i),
-      e.d(i, "request", function() {
+      e.d(i, "request", function () {
         return f;
       });
     var o = {};
     e.r(o),
-      e.d(o, "rootContainer", function() {
+      e.d(o, "rootContainer", function () {
         return n;
       });
     var d = {};
     e.r(d),
-      e.d(d, "rootContainer", function() {
+      e.d(d, "rootContainer", function () {
         return B;
       });
     var s = e("bCY9"),
@@ -462,7 +462,7 @@ var S = Object.assign,
       timeout: 3e4,
       prefix: "https://cnodejs.org/api/v1",
       errorConfig: {
-        adaptor: m => {
+        adaptor: (m) => {
           const M = m.success,
             D = m.error_msg,
             T = Object(E.a)(m, ["success", "error_msg"]);
@@ -480,7 +480,7 @@ var S = Object.assign,
       t = e("I5X1");
     if (typeof t.a != "function")
       throw new Error("[plugin-initial-state]: useModel is not a function, @umijs/plugin-model is required.");
-    var r = m => {
+    var r = (m) => {
       const M = m.children,
         D = Object(v.useRef)(!1),
         T = Object(t.a)("@@initialState") || {},
@@ -510,12 +510,12 @@ var S = Object.assign,
       R.a.createElement(
         U.UmiContext.Provider,
         { value: p },
-        Object.entries(b).map(M =>
+        Object.entries(b).map((M) =>
           R.a.createElement(A, {
             key: M[0],
             namespace: M[0],
             hook: M[1],
-            onUpdate: D => {
+            onUpdate: (D) => {
               const T = M,
                 _ = Object(l.a)(T, 1),
                 N = _[0];
