@@ -15,6 +15,7 @@ const dependencies = packageJson.dependencies as Record<string, string>;
 
 // https://polyfill.alicdn.com/polyfill.min.js
 // https://cdn.polyfill.io/v3/polyfill.min.js
+// 自建polyfill服务: https://github.com/Financial-Times/polyfill-service
 const polyfill = "https://polyfill.alicdn.com/polyfill.min.js?features=es2015%2Ces2016%2Ces2017%2Ces2018%2Ces2019";
 const externalList: ExternalsItem[] = [
   {
