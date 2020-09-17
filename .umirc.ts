@@ -88,7 +88,9 @@ export default defineConfig({
     mode: "emit",
   },
   ignoreMomentLocale: true,
-  esbuild: {},
+  esbuild: {
+    minify: true,
+  },
   nodeModulesTransform: {
     type: "none",
     exclude: [],
