@@ -334,7 +334,7 @@ var S = Object.assign,
         g = O.loading;
       return (
         Object(i.useEffect)(() => {
-          console.log("ENV :>> ", void 0), console.log("SERVER_PATH", "https://cnodejs.org/api/v1t");
+          console.log("ENV :>> ", void 0), console.log("SERVER_PATH", "https://cnodejs.org/api/v1");
         }, []),
         Object(d.a)(() => {
           console.log("useMount");
@@ -460,7 +460,7 @@ var S = Object.assign,
       E = e("PpiC");
     const f = {
       timeout: 3e4,
-      prefix: "https://cnodejs.org/api/v1t",
+      prefix: "https://cnodejs.org/api/v1",
       errorConfig: {
         adaptor: (m) => {
           const M = m.success,
