@@ -1,8 +1,8 @@
-import path from "path";
-import { defineConfig } from "umi";
+import path from 'path';
+import { defineConfig } from 'umi';
 
-import config from "./config";
-import packageJson from "./package.json";
+import config from './config';
+import packageJson from './package.json';
 
 interface ExternalsItem {
   key: string;
@@ -21,32 +21,32 @@ const externalList: ExternalsItem[] = [
   {
     key: "react",
     var: "window.React",
-    cdn: `https://cdn.jsdelivr.net/npm/react@{{version}}/umd/react.${NODE_ENV}.min.js`,
+    cdn: `https://cdn.jsdelivr.net/npm/react@{{version}}/umd/react.${NODE_ENV}.min.js`
   },
   {
     key: "react-dom",
     var: "window.ReactDOM",
-    cdn: `https://cdn.jsdelivr.net/npm/react-dom@{{version}}/umd/react-dom.${NODE_ENV}.min.js`,
-  },
+    cdn: `https://cdn.jsdelivr.net/npm/react-dom@{{version}}/umd/react-dom.${NODE_ENV}.min.js`
+  }
 ];
 
 // * 适用 package.json dependencies 版本号使用 ^version/version 格式
 const matchVersion = (it: ExternalsItem) => /^\^?\d+/.test(dependencies[it.key]);
 
-const matchExternals = externalList.filter(matchVersion).map((it) => ({
+const matchExternals = externalList.filter(matchVersion).map(it => ({
   ...it,
-  cdn: it.cdn.replace("{{version}}", dependencies[it.key].replace(/^\^/, "")),
+  cdn: it.cdn.replace("{{version}}", dependencies[it.key].replace(/^\^/, ""))
 }));
 
 const externals = matchExternals.reduce(
   (prev, curr) =>
     Object.assign(prev, {
-      [curr.key]: curr.var,
+      [curr.key]: curr.var
     }),
-  {} as Record<string, string>,
+  {} as Record<string, string>
 );
 
-const scripts = [polyfill, ...matchExternals.map((it) => it.cdn)];
+const scripts = [polyfill, ...matchExternals.map(it => it.cdn)];
 
 export default defineConfig({
   base: "/",
@@ -56,11 +56,17 @@ export default defineConfig({
   title: false,
   hash: true,
   history: {
-    type: "hash",
+    type: "hash"
+  },
+  request: {
+    dataField: 'result',
   },
   define: {
-    ENV: process.env.BIZ_ENV,
-    ...config,
+    "process.env.BIZ_ENV": process.env.BIZ_ENV,
+    ...Object.keys(config).reduce((conf, key) => {
+      conf[`process.env.${key}`] = (config as Record<string, any>)[key];
+      return conf;
+    }, {} as Record<string, any>)
   },
   proxy: {
     // https://cli.vuejs.org/config/#devserver-proxy
@@ -68,37 +74,37 @@ export default defineConfig({
       target: config.SERVER_PATH,
       changeOrigin: true,
       pathRewrite: {
-        "^/api": "",
-      },
-    },
+        "^/api": ""
+      }
+    }
   },
   targets: {
     chrome: 79,
     firefox: false,
     safari: false,
     edge: false,
-    ios: false,
+    ios: false
   },
   theme: {
     // 配置less变量
   },
   cssLoader: {
-    localsConvention: "camelCase",
+    localsConvention: "camelCase"
   },
   cssModulesTypescriptLoader: {
-    mode: "emit",
+    mode: "emit"
   },
   ignoreMomentLocale: true,
   esbuild: {
-    minify: true,
+    minify: true
   },
   nodeModulesTransform: {
     type: "none",
-    exclude: [],
+    exclude: []
   },
   externals,
   scripts: scripts,
-  chainWebpack: (config) => {
+  chainWebpack: config => {
     config.resolve.alias.set("@", path.resolve(__dirname, "./src/"));
     config.optimization.splitChunks({
       chunks: "all",
@@ -111,10 +117,10 @@ export default defineConfig({
           name: "vendors",
           test: /[\\/]node_modules[\\/]/,
           priority: -11,
-          enforce: true,
-        },
-      },
+          enforce: true
+        }
+      }
     });
   },
-  chunks: ["vendors", "umi"],
+  chunks: ["vendors", "umi"]
 });

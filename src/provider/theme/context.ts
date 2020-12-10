@@ -7,7 +7,7 @@ interface Theme {
 
 const ThemeContext = React.createContext<Theme>({
   state: "red",
-  dispatch: (_args: any) => {},
+  dispatch: (_args: any) => {}
 });
 
 export default ThemeContext;

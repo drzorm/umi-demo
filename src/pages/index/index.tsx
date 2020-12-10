@@ -1,7 +1,6 @@
-import React, { useContext, useEffect } from "react";
-
 import { useMount } from "ahooks";
 import clsx from "clsx";
+import React, { useContext, useEffect } from "react";
 import { Helmet, request, useRequest } from "umi";
 
 import ThemeContext from "@/provider/theme/context";
@@ -13,23 +12,13 @@ const interval = 6000;
 export default () => {
   const themeContext = useContext(ThemeContext);
 
-  const { data, error, loading } = useRequest(
-    () =>
-      request("/topics", {
-        params: {
-          page: ~~(Math.random() * 99),
-          limit: 1,
-        },
-      }),
-    {
-      // pollingInterval: 6000,
-      refreshOnWindowFocus: true,
-    },
-  );
+  const { data = {}, error, loading } = useRequest("/sentences");
+
+  console.log("data", data);
 
   useEffect(() => {
-    console.log("ENV :>> ", ENV);
-    console.log("SERVER_PATH", SERVER_PATH);
+    console.log("ENV :>> ", process.env.ENV);
+    console.log("SERVER_PATH", process.env.SERVER_PATH);
   }, []);
 
   useMount(() => {
@@ -40,7 +29,7 @@ export default () => {
     const timer = window.setInterval(() => {
       themeContext.dispatch({
         type: "update",
-        payload: ["blue", "red"][index++ % 2],
+        payload: ["blue", "red"][index++ % 2]
       });
     }, interval);
     return () => {
@@ -53,7 +42,7 @@ export default () => {
       <Helmet>
         <title>{themeContext.state}</title>
       </Helmet>
-      <div className={clsx(style.theme, style[themeContext.state])}>{data?.[0]?.title}</div>
+      <div className={clsx(style.theme, style[themeContext.state])}>{data.name}</div>
     </>
   );
 };

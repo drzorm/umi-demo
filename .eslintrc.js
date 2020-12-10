@@ -1,25 +1,35 @@
 module.exports = {
   env: {
     browser: true,
-    es6: true,
+    es6: true
   },
-  extends: ["alloy", "alloy/react", "alloy/typescript", "plugin:react-hooks/recommended"],
+  extends: [
+    "plugin:@typescript-eslint/recommended",
+    "prettier/@typescript-eslint",
+    "plugin:react/recommended",
+    "plugin:prettier/recommended"
+  ],
   globals: {
-    ENV: "readonly",
-    SERVER_PATH: "readonly",
+    BIZ_ENV: "readonly",
+    SERVER_PATH: "readonly"
   },
   parser: "@typescript-eslint/parser",
   parserOptions: {
     ecmaFeatures: {
-      jsx: true,
+      jsx: true
     },
-    ecmaVersion: 11,
-    sourceType: "module",
+    ecmaVersion: 2020,
+    sourceType: "module"
   },
-  plugins: ["react", "@typescript-eslint"],
+  plugins: ["@typescript-eslint", "prettier", "react", "react-hooks"],
   rules: {
-    "react/display-name": 0,
-    "react-hooks/rules-of-hooks": "error", // 检查 Hook 的规则
-    "react-hooks/exhaustive-deps": "warn", // 检查 effect 的依赖
-  },
+    "@typescript-eslint/explicit-module-boundary-types": "off",
+    "@typescript-eslint/no-empty-function": "off",
+    "@typescript-eslint/no-explicit-any": "off",
+    "@typescript-eslint/no-var-requires": "off",
+    "react-hooks/exhaustive-deps": "warn",
+    "react-hooks/rules-of-hooks": "error",
+    "react/display-name": "off",
+    "react/prop-types": "off"
+  }
 };

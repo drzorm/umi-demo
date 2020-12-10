@@ -2,20 +2,18 @@
 
 /*
  * 生产环境配置 - 默认
- * 通过 .umirc.ts define 配置项注入, 用于提供给代码中可用的变量
+ * 通过 .umirc.ts define 配置项注入 process.env, 用于提供给代码中可用的变量
  */
 
-const localConfig = require(`./config.local.ts`);
-const envConfig = require(`./config.${process.env.BIZ_ENV || "prod"}.ts`);
-
-interface Config {
+export interface Config {
   SERVER_PATH: string;
-  [key: string]: any;
 }
 
+const bizEnv = process.env.BIZ_ENV || 'prod'
+
 const config: Config = {
-  ...envConfig,
-  ...(process.env.NODE_ENV === "development" ? localConfig : null),
+  ...(bizEnv === "local" ? require("./local") : (bizEnv !== "prod") ? require(`./${bizEnv}.ts`) : null),
+  ...require('./prod')
 };
 
 export default config;

@@ -2,7 +2,10 @@
 **/*.svg
 **/*.ejs
 **/*.html
-package.json
+**/*.css.d.ts
+**/*.less.d.ts
 .umi
 .umi-production
 .umi-test
+package.json
+docs

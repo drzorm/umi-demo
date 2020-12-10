@@ -1,16 +1,15 @@
 {
   "private": true,
   "scripts": {
-    "start": "cross-env BIZ_ENV=dev umi dev",
+    "start": "cross-env BIZ_ENV=local umi dev",
     "build:dev": "cross-env BIZ_ENV=dev umi build",
     "build:test": "cross-env BIZ_ENV=test umi build",
     "build:prod": "cross-env BIZ_ENV=prod umi build",
-    "build": "cross-env umi build",
-    "analyze": "cross-env ANALYZE=1 umi build",
+    "build": "cross-env BIZ_ENV=prod umi build",
     "postinstall": "umi generate tmp",
-    "prettier": "prettier --write '**/*.{js,jsx,tsx,ts,less,md,json}'",
-    "test": "umi-test",
-    "test:coverage": "umi-test --coverage"
+    "eslint": "eslint \"src/**/*.{js,ts,jsx,tsx,json}\" --quiet --fix",
+    "stylelint": "stylelint \"src/**/*.{css,less}\" --quiet --fix",
+    "lint": "yarn eslint && yarn stylelint"
   },
   "gitHooks": {
     "pre-commit": "lint-staged"
@@ -21,46 +20,43 @@
     }
   },
   "lint-staged": {
-    "*.{js,jsx,less,md,json}": [
-      "prettier --write"
+    "*.{css,less}": [
+      "stylelint --quiet --fix"
     ],
-    "*.ts?(x)": [
-      "prettier --parser=typescript --write"
+    "*.{js,ts,tsx,json}": [
+      "eslint --quiet --fix"
     ]
   },
   "dependencies": {
-    "ahooks": "^2.6.0",
+    "ahooks": "^2.9.2",
     "clsx": "^1.1.1",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1"
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1"
   },
   "devDependencies": {
     "@commitlint/cli": "^11.0.0",
     "@commitlint/config-conventional": "^11.0.0",
-    "@types/mockjs": "^1.0.3",
-    "@types/node": "^14.10.1",
-    "@typescript-eslint/eslint-plugin": "^4.1.1",
-    "@typescript-eslint/parser": "^4.1.1",
+    "@typescript-eslint/eslint-plugin": "^4.9.1",
+    "@typescript-eslint/parser": "^4.9.1",
     "@umijs/plugin-esbuild": "^1.0.1",
-    "@umijs/preset-react": "1.6.4",
-    "@umijs/test": "^3.2.20",
-    "cross-env": "^7.0.2",
-    "eslint": "^7.9.0",
-    "eslint-config-alloy": "^3.8.0",
-    "eslint-plugin-import": "^2.22.0",
-    "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-promise": "^4.2.1",
-    "eslint-plugin-react": "^7.20.6",
-    "eslint-plugin-react-hooks": "^4.1.2",
-    "husky": "^4.3.0",
-    "lint-staged": "^10.3.0",
+    "@umijs/preset-react": "1.7.7",
+    "babel-eslint": "^10.1.0",
+    "cross-env": "^7.0.3",
+    "eslint": "^7.15.0",
+    "eslint-config-prettier": "^7.0.0",
+    "eslint-config-umi": "^1.6.0",
+    "eslint-plugin-prettier": "^3.2.0",
+    "eslint-plugin-react": "^7.21.5",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "husky": "^4.3.5",
+    "lint-staged": "^10.5.3",
     "mockjs": "^1.1.0",
-    "prettier": "^2.1.1",
-    "stylelint": "^13.7.1",
+    "prettier": "^2.2.1",
+    "stylelint": "^13.8.0",
     "stylelint-config-idiomatic-order": "^8.1.0",
-    "stylelint-config-prettier": "^8.0.2",
-    "typescript": "4.0.2",
-    "umi": "3.2.20",
+    "stylelint-config-recommended": "^3.0.0",
+    "typescript": "^4.1.2",
+    "umi": "^3.3.1",
     "yorkie": "^2.0.0"
   }
 }

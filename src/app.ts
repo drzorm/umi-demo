@@ -1,30 +1,37 @@
 import { RequestConfig } from "umi";
 
+// https://umijs.org/plugins/plugin-request
 export const request: RequestConfig = {
   timeout: 30000,
-  prefix: process.env.NODE_ENV === "development" ? "/api" : SERVER_PATH,
+  prefix: "",
   errorConfig: {
     adaptor: res => {
-      const { success, error_msg, ...others } = res;
-
-      if (typeof success === "undefined") {
-        return {
-          success: false,
-          errorMessage: error_msg || "网络异常, 请稍后重试",
-        };
+      return {
+        ...res,
+        success: res.code === 200,
+        errorMessage: res.message
+      };
+    }
+  },
+  middlewares: [
+    // async (ctx, next) => {
+    //   await next();
+    // }
+  ],
+  requestInterceptors: [
+    (url, options) => {
+      if (!/^https?:\/\//.test(url)) {
+        url = `${process.env.BIZ_ENV === "local" ? "/api" : process.env.SERVER_PATH}${url}`;
       }
 
-      return {
-        ...others,
-        success: res.success,
-        errorMessage: res.error_msg,
-      };
-    },
-  },
-  // 中间件
-  middlewares: [],
-  // request 拦截器
-  requestInterceptors: [],
-  // response 拦截器
-  responseInterceptors: [],
+      return { url, options };
+    }
+  ],
+  responseInterceptors: [
+    // async response => {
+    //   const data = await response.clone().json();
+    //   if(data.code !== 200) message.error(data.message)
+    //   return response;
+    // }
+  ]
 };
