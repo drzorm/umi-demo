@@ -1,20 +1,18 @@
 import { useMount } from "ahooks";
 import clsx from "clsx";
-import React, { useContext, useEffect } from "react";
-import { Helmet, request, useRequest } from "umi";
+import React, { useContext, useEffect, useRef } from "react";
+import { Helmet, useRequest } from "umi";
 
 import ThemeContext from "@/provider/theme/context";
 
 import style from "./index.less";
 
-let index = 0;
 const interval = 6000;
 export default () => {
   const themeContext = useContext(ThemeContext);
+  const index = useRef(0);
 
   const { data = {}, error, loading } = useRequest("/sentences");
-
-  console.log("data", data);
 
   useEffect(() => {
     console.log("ENV :>> ", process.env.ENV);
@@ -29,7 +27,7 @@ export default () => {
     const timer = window.setInterval(() => {
       themeContext.dispatch({
         type: "update",
-        payload: ["blue", "red"][index++ % 2]
+        payload: ["blue", "red"][index.current++ % 2]
       });
     }, interval);
     return () => {
